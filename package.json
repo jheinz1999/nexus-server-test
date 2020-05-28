@@ -2,6 +2,7 @@
   "name": "my-nexus-app-5069579963487756",
   "license": "UNLICENSED",
   "dependencies": {
+    "cors": "^2.8.5",
     "nexus": "0.22.0",
     "nexus-plugin-prisma": "^0.8.0"
   },
