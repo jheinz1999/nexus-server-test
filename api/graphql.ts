@@ -21,6 +21,7 @@ schema.objectType({
 schema.mutationType({
   definition(t) {
     t.crud.createOneusers();
+    t.crud.updateOneusers();
     t.field('updateUser', {
       args: {
         id: schema.arg({
