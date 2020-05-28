@@ -18,6 +18,12 @@ schema.objectType({
   },
 });
 
+schema.mutationType({
+  definition(t) {
+    t.crud.createOneusers();
+  },
+});
+
 schema.queryType({
   definition(t) {
     t.list.field('users', {
@@ -25,6 +31,24 @@ schema.queryType({
       resolve(_root, _args, ctx) {
         return ctx.db.users.findMany();
       }
+    });
+    t.field('userById', {
+      type: 'users',
+      resolve(_root, args, ctx) {
+        if (!args || !args.id) {
+          return null;
+        }
+        return ctx.db.users.findOne({
+          where: {
+            id: args.id,
+          }
+        });
+      },
+      args: {
+        id: schema.arg({
+          type: 'Int',
+        }),
+      },
     });
   }
 });
