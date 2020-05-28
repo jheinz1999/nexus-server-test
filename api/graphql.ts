@@ -21,6 +21,28 @@ schema.objectType({
 schema.mutationType({
   definition(t) {
     t.crud.createOneusers();
+    t.field('updateUser', {
+      args: {
+        id: schema.arg({
+          type: 'Int',
+        }),
+        data: schema.arg({
+          type: 'usersUpdateInput',
+        }),
+      },
+      type: 'users',
+      resolve(_root, { id, data }, ctx) {
+        if (!id) {
+          return null;
+        }
+        return ctx.db.users.update({
+          where: {
+            id,
+          },
+          data,
+        })
+      },
+    });
   },
 });
 
